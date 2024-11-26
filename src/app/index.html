@@ -1,0 +1,160 @@
+<div>
+    <ul class="flex space-x-2 rtl:space-x-reverse">
+        <li>
+            <a href="javascript:;" class="text-primary hover:underline">لوحة التحكم</a>
+        </li>
+        <li class="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+            <span>الفهرس</span>
+        </li>
+    </ul>
+    <div class="grid grid-cols-12 gap-6 mt-5">
+        <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 panel">
+            <div class="flex mb-5">
+                <h5 class="text-base font-bold">شجرة المستندات</h5>
+            </div>
+            <ul class="font-semibold">
+                <li class="py-[10px]">
+                    <button type="button" (click)="toggleTreeview1('all')">
+                        <icon-caret-down
+                            [class]="'w-5 h-5 text-primary inline relative -top-1 ltr:mr-2 rtl:ml-2 ' + [treeview1.includes('all') ? 'rotate-180': '' ]"
+                        />
+                        <icon-folder class="relative -top-1 inline text-primary ltr:mr-2 rtl:ml-2" />
+                        كل التصنيفات
+                    </button>
+                    <div [@slideDownUp]="!treeview1.includes('all')" class="accordion-content">
+                        <ul class="ltr:pl-14 rtl:pr-14">
+                            <li class="py-[8px]">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1436
+                            </li>
+                            <li class="py-[8px]">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1437
+                            </li>
+                            <li class="py-[8px]">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1441
+                            </li>
+                            <li class="py-[8px]">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1443
+                            </li>
+                            <li class="py-[8px]">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1445
+                            </li>
+                            <li class="py-[8px]">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1446
+                            </li>
+                            <li class="py-[8px]">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1470
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="py-[10px]">
+                    <button type="button" (click)="toggleTreeview1('images')" class="active">
+                        <icon-caret-down
+                            [class]="'w-5 h-5 text-primary inline relative -top-1 ltr:mr-2 rtl:ml-2 ' + [treeview1.includes('images') ? 'rotate-180': '' ]"
+                        />
+                        <icon-folder class="relative -top-1 inline text-primary ltr:mr-2 rtl:ml-2" />
+                        تعاميم هيئة القضاء العليا
+                    </button>
+                    <div [@slideDownUp]="!treeview1.includes('images')" class="accordion-content">
+                        <ul class="ltr:pl-14 rtl:pr-14">
+                            <li class="pt-[8px]">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1439
+                            </li>
+                            <li class="pt-[8px]">
+                                <button type="button" (click)="toggleTreeview1('pages')">
+                                    <icon-caret-down
+                                        [class]="'w-5 h-5 text-primary inline relative -top-1 ltr:mr-2 rtl:ml-2 ' + [treeview1.includes('pages') ? 'rotate-180': '' ]"
+                                    />
+                                    <icon-folder class="relative -top-1 inline text-primary ltr:mr-2 rtl:ml-2" />
+                                    1440
+                                </button>
+                                <div [@slideDownUp]="!treeview1.includes('pages')" class="accordion-content">
+                                    <ul class="ltr:pl-14 rtl:pr-14">
+                                        <li class="pt-[8px]">
+                                            <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                            1969
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="py-[10px]">
+                    <button type="button" (click)="toggleTreeview1('html')">
+                        <icon-caret-down
+                            [class]="'w-5 h-5 text-primary inline relative -top-1 ltr:mr-2 rtl:ml-2 ' + [treeview1.includes('html') ? 'rotate-180': '' ]"
+                        />
+                        <icon-folder class="relative -top-1 inline text-primary ltr:mr-2 rtl:ml-2" />
+                        تعاميم وزارة العدل
+                    </button>
+                    <div [@slideDownUp]="!treeview1.includes('html')" class="accordion-content">
+                        <ul class="ltr:pl-14 rtl:pr-14">
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1201
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1320
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1423
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1437
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1439
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1440
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1441
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1442
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1443
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1445
+                            </li>
+                            <li class="py-[5px] ltr:pl-8 rtl:pr-8">
+                                <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                                1446
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="py-[10px] ltr:pl-7 rtl:pr-7">
+                    <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                    مجلد جديد
+                </li>
+                <li class="py-[10px] ltr:pl-7 rtl:pr-7">
+                    <icon-txt-file class="inline h-4.5 w-4.5 text-primary ltr:mr-2 rtl:ml-2" />
+                    مجلد جديد
+                </li>
+            </ul>
+        </div>
+        <div class="col-span-12 md:col-span-6 lg:col-span-8 xl:col-span-9 panel"></div>
+    </div>
+</div>
