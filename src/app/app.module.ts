@@ -35,6 +35,10 @@ import { AuthLayout } from './layouts/auth-layout';
 
 import { HeaderComponent } from './layouts/header';
 import { FooterComponent } from './layouts/footer';
+import { Error404Component } from './misc/error404';
+import { Error500Component } from './misc/error500';
+import { Error403Component } from './misc/error403';
+import { FlatpickrDefaults } from 'angularx-flatpickr';
 
 @NgModule({
     imports: [
@@ -54,8 +58,18 @@ import { FooterComponent } from './layouts/footer';
         StoreModule.forRoot({ index: indexReducer }),
         SharedModule.forRoot(),
     ],
-    declarations: [AppComponent, HeaderComponent, FooterComponent, IndexComponent, AppLayout, AuthLayout],
-    providers: [Title],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        IndexComponent,
+        AppLayout,
+        AuthLayout,
+        Error404Component,
+        Error500Component,
+        Error403Component,
+    ],
+    providers: [Title, FlatpickrDefaults],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

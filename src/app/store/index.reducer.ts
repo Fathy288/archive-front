@@ -11,6 +11,7 @@ export const initialState = {
     sidebar: false,
     languageList: [{ code: 'ae', name: 'العربية' }],
     isShowMainLoader: false,
+    isShowRouterLoader: false,
     semidark: false,
 };
 
@@ -23,6 +24,8 @@ export function indexReducer(state = initialState, action: any) {
         return { ...state, ...{ direction: payload } };
     } else if (type === 'toggleMainLoader') {
         return { ...state, ...{ isShowMainLoader: payload } };
+    } else if (type === 'toggleRouterLoader') {
+        return { ...state, ...{ isShowRouterLoader: payload } };
     }
 
     if (type === 'setMainLayout') {

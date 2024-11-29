@@ -16,13 +16,45 @@ import { NgScrollbarModule, provideScrollbarOptions } from 'ngx-scrollbar';
 // headlessui
 import { MenuModule } from 'headlessui-angular';
 import { IconModule } from './app/shared/icon/icon.module';
+import { DataTableModule } from '@bhplugin/ng-datatable';
+import { NgxTippyModule } from 'ngx-tippy-wrapper';
+import { NgxCustomModalComponent } from 'ngx-custom-modal';
+import { NgSelectModule } from '@ng-select/ng-select';
+// flatpicker
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 // icons
 
 @NgModule({
     declarations: [],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, TranslateModule.forChild(), NgScrollbarModule, MenuModule, IconModule],
-    exports: [FormsModule, ReactiveFormsModule, TranslateModule, NgScrollbarModule, MenuModule, IconModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        TranslateModule.forChild(),
+        NgScrollbarModule,
+        MenuModule,
+        IconModule,
+        DataTableModule,
+        NgxTippyModule,
+        NgxCustomModalComponent,
+        NgSelectModule,
+        FlatpickrModule,
+    ],
+    exports: [
+        FormsModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        NgScrollbarModule,
+        MenuModule,
+        IconModule,
+        DataTableModule,
+        NgxTippyModule,
+        NgxCustomModalComponent,
+        NgSelectModule,
+        FlatpickrModule,
+    ],
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders<any> {

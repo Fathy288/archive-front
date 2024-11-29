@@ -114,3 +114,9 @@
 .bh-datatable .bh-table-responsive table thead tr th {
     @apply rtl:text-right;
 }
+
+.bh-datatable table tbody tr td,
+.bh-datatable table tfoot tr th,
+.bh-datatable table thead tr th {
+    text-align: start !important;
+}

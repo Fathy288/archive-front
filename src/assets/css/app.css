@@ -6,6 +6,8 @@
 @import '@ng-select/ng-select/themes/default.theme.css';
 @import 'quill/dist/quill.snow.css';
 @import 'file-upload-with-preview/dist/style.css';
-@import 'flatpickr/dist/flatpickr.min.css';
+@import 'flatpickr/dist/flatpickr.css';
 @import 'nouislider/dist/nouislider.min.css';
+@import 'datatable.css';
+@import 'modal.css';
 @import 'tailwind.css';

@@ -163,10 +163,15 @@ import { IconXComponent } from './icon-x';
 import { IconXCircleComponent } from './icon-x-circle';
 import { IconZipFileComponent } from './icon-zip-file';
 import { IconCodeFilesComponent } from 'src/app/shared/icon/icon-code-file';
+import { IconExcelComponent } from './icon-excel';
+import { IconCSVComponent } from './icon-csv';
+import { IconResetFilterComponent } from './icon-reset-filter';
 
 @NgModule({
     imports: [CommonModule],
     declarations: [
+        IconExcelComponent,
+        IconCSVComponent,
         IconMenuAppsComponent,
         IconMenuAuthenticationComponent,
         IconMenuCalendarComponent,
@@ -330,8 +335,12 @@ import { IconCodeFilesComponent } from 'src/app/shared/icon/icon-code-file';
         IconXCircleComponent,
         IconZipFileComponent,
         IconCodeFilesComponent,
+        IconResetFilterComponent,
     ],
     exports: [
+        IconResetFilterComponent,
+        IconExcelComponent,
+        IconCSVComponent,
         IconMenuAppsComponent,
         IconMenuAuthenticationComponent,
         IconMenuCalendarComponent,

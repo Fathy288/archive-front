@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { delay, filter, map, switchMap, tap } from 'rxjs/operators';
+import { LoaderService } from './service/loader.service';
 
 @Component({
     selector: 'app-root',
@@ -12,7 +13,25 @@ export class AppComponent {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private titleService: Title,
+        private loaderService: LoaderService,
     ) {
+        this.router.events
+            .pipe(
+                filter((event) => event instanceof NavigationStart || event instanceof RouteConfigLoadStart),
+                tap(() => {
+                    this.loaderService.startRouterLoader();
+                }),
+            )
+            .subscribe();
+        this.router.events
+            .pipe(
+                filter((event) => event instanceof NavigationEnd || event instanceof RouteConfigLoadEnd),
+                delay(900),
+                tap(() => {
+                    this.loaderService.stopRouterLoader();
+                }),
+            )
+            .subscribe();
         this.router.events
             .pipe(
                 filter((event) => event instanceof NavigationEnd),

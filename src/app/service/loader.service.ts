@@ -14,4 +14,12 @@ export class LoaderService {
     stoptMainLoader(): void {
         this.storeData.dispatch({ type: 'toggleMainLoader', payload: false });
     }
+
+    startRouterLoader(): void {
+        this.storeData.dispatch({ type: 'toggleRouterLoader', payload: true });
+    }
+
+    stopRouterLoader(): void {
+        this.storeData.dispatch({ type: 'toggleRouterLoader', payload: false });
+    }
 }
