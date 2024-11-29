@@ -10,16 +10,16 @@ import { Error500Component } from './misc/error500';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'dashboard',
         component: AppLayout,
         children: [{ path: '', component: IndexComponent, data: { title: 'لوحة التحكم' } }],
     },
     {
-        path: 'auth',
+        path: '',
         component: AuthLayout,
         children: [
             {
-                path: 'login',
+                path: '',
                 loadComponent: () => import('./auth/signin/signin').then((c) => c.SigninComponent),
             },
         ],
