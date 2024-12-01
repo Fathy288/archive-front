@@ -48,3 +48,9 @@ Thumbs.db
 .angular/
 assets/
 theme/
+
+.angular/
+assets/
+node_modules.js/
+src/
+theme/
