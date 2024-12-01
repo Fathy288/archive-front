@@ -54,3 +54,4 @@ assets/
 node_modules.js/
 src/
 theme/
+dist/
