@@ -1,0 +1,10 @@
+// remove old files in the branch
+
+git rm -rf --cached .
+git rm -rf .
+git checkout HEAD -- .gitignore
+git clean -fd
+
+// copy files from dist folder to current dir
+
+cp -r dist/* .
