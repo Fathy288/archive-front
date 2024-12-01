@@ -54,3 +54,5 @@ node_modules.js/
 src/
 theme/
 dist/
+src/
+node_modules/
