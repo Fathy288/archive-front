@@ -1,71 +1,46 @@
 import { Component, DestroyRef } from '@angular/core';
 import { toggleAnimation } from 'src/app/shared/animations';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { AppService } from 'src/app/service/app.service';
 import { SharedModule } from 'src/shared.module';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from 'src/app/shared/component/input/input.component';
 import { ActionButtonComponent } from 'src/app/shared/component/action-button/action-button.component';
-import { SelectComponent } from '../../shared/component/select/select.component';
 import { CheckInputComponent } from 'src/app/shared/component/check-input/check-input.component';
-import { RadioInputComponent } from 'src/app/shared/component/radio-input/radio-input.component';
-import { DateInputComponent } from '../../shared/component/date-input/date-input.component';
-import { HijriInputComponent } from '../../shared/component/hijri-input/hijri-input.component';
-import { UtilityService } from 'src/app/service/utility.service';
-import { NgSelectComponent } from '../../shared/component/ng-select/ng-select.component';
+import { AuthService } from 'src/app/service/auth.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ROUTES } from 'src/app/shared/helper/routes';
 
 @Component({
     templateUrl: './signin.html',
     animations: [toggleAnimation],
     standalone: true,
-    imports: [
-        CommonModule,
-        SharedModule,
-        ReactiveFormsModule,
-        RouterModule,
-        InputComponent,
-        ActionButtonComponent,
-        CheckInputComponent,
-        RadioInputComponent,
-        DateInputComponent,
-        HijriInputComponent,
-        NgSelectComponent,
-    ],
+    imports: [CommonModule, SharedModule, ReactiveFormsModule, RouterModule, InputComponent, ActionButtonComponent, CheckInputComponent],
 })
 export class SigninComponent {
-    options = [
-        {
-            id: 1,
-            label: 'رقم واحد',
-        },
-        {
-            id: 2,
-            label: 'رقم اتنين',
-        },
-    ];
     store: any;
     form: FormGroup;
     loading: boolean = false;
-    mask1 = [/\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
+    succeeded: boolean | null = null;
+    redirect: string = '/';
     constructor(
         public translate: TranslateService,
         public storeData: Store<any>,
         public router: Router,
-        private appSetting: AppService,
         private destroyRef: DestroyRef,
         private fb: FormBuilder,
-        private utility: UtilityService,
+        private auth: AuthService,
+        private route: ActivatedRoute,
     ) {
         this.initStore();
         this.form = this.fb.group({
             username: [null, [Validators.required]],
             password: [null, [Validators.required]],
-            date: [null, [Validators.required]],
             checked: [false, [Validators.required]],
         });
+        this.redirect = this.route.snapshot.queryParams['returnURL'] || '/';
     }
     initStore() {
         this.storeData
@@ -79,7 +54,40 @@ export class SigninComponent {
         return this?.form?.get(control) as FormControl;
     }
 
+    getFCV(control: string): any {
+        return this?.form?.get(control)?.value;
+    }
+
     login(): void {
-        this.form.markAllAsTouched();
+        if (!this.form.valid) {
+            this.form.markAllAsTouched();
+            return;
+        }
+        this.loading = true;
+        this.auth
+            .login(this.getFCV('username'), this.getFCV('password'))
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe({
+                next: (res) => {
+                    this.succeeded = true;
+                    let timeout: any;
+                    timeout = setTimeout(() => {
+                        this.succeeded = null;
+                        this.loading = false;
+                        clearTimeout(timeout);
+                        this.router.navigate([this.redirect]);
+                    }, 1500);
+                },
+                error: () => {
+                    this.succeeded = false;
+                    this.loading = false;
+                    this.form.reset();
+                    let timeout: any;
+                    timeout = setTimeout(() => {
+                        this.succeeded = null;
+                        clearTimeout(timeout);
+                    }, 3000);
+                },
+            });
     }
 }

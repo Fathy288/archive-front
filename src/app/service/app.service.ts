@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { $themeConfig } from '../theme.config';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AppService {
@@ -9,6 +10,7 @@ export class AppService {
     constructor(
         public translate: TranslateService,
         public store: Store<any>,
+        private authService: AuthService,
     ) {
         this.initStoreData();
     }
@@ -57,6 +59,9 @@ export class AppService {
         val = localStorage.getItem('semidark');
         val = val === 'true' ? true : $themeConfig.semidark;
         this.store.dispatch({ type: 'toggleSemidark', payload: val });
+
+        const user = this.authService.getLoginUser();
+        this.store.dispatch({ type: 'setLoginUser', payload: user ? user : null });
     }
 
     toggleLanguage(item: any) {

@@ -12,6 +12,21 @@
         >
             <div class="relative flex flex-col justify-center rounded-md bg-white/60 px-6 py-20 backdrop-blur-lg dark:bg-black/50 lg:min-h-[500px]">
                 <div class="mx-auto w-full max-w-[440px]">
+                    @if(succeeded === true) {
+                    <div class="flex items-center mb-6 p-3.5 rounded text-success bg-success-light dark:bg-success-dark-light">
+                        <span class="flex gap-2 ltr:pr-2 rtl:pl-2 text-sm">
+                            <icon-check class="w-5"></icon-check>
+                            <strong>تم تسجيل الدخول بنجاح ، جاري إعادة التوجيه ...</strong>
+                        </span>
+                    </div>
+                    } @if(succeeded === false){
+                    <div class="flex items-center mb-6 p-3.5 rounded text-danger bg-danger-light dark:bg-success-dark-light">
+                        <span class="flex gap-2 ltr:pr-2 rtl:pl-2 text-sm">
+                            <icon-info-circle></icon-info-circle>
+                            <strong>بيانات الدخول غير صحيحة، أعد المحاولة مرة أخرى</strong>
+                        </span>
+                    </div>
+                    }
                     <div class="mb-10">
                         <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-2xl">تسجيل الدخول</h1>
                         <p class="mt-2 text-sm font-bold leading-normal text-white-dark">ادخل بيانات التعريف الخاصة بك لإتمام تسجيل الدخول</p>
@@ -56,26 +71,6 @@
                             </ng-template>
                         </div>
                         <div class="mb-4">
-                            <normal-ng-select
-                                [control]="getFC('date')"
-                                [options]="options"
-                                optionLabel="label"
-                                optionValue="id"
-                                placeholder="اختر التاريخ"
-                                label="اختر النوع"
-                                [readOnly]="false"
-                                [disabled]="false"
-                                [searcheable]="true"
-                                [clearable]="true"
-                                [multiple]="true"
-                                [iconTemplate]="dateTemplate"
-                                inputType="group"
-                            ></normal-ng-select>
-                            <ng-template #dateTemplate>
-                                <icon-lock-dots [fill]="true" />
-                            </ng-template>
-                        </div>
-                        <div class="mb-4">
                             <normal-check-input
                                 [control]="getFC('checked')"
                                 label="تذكرني عند الدخول مرة أخرى"
@@ -89,7 +84,7 @@
                             (onClicked)="login()"
                             type="button"
                             styleClass="btn-primary mt-6 w-full border-0 py-3"
-                            [loading]="false"
+                            [loading]="loading"
                             text="تسجيل الدخول"
                             spinnerStyleClass="border-white w-6 h-6"
                         ></action-button>

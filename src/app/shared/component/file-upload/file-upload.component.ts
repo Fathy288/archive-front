@@ -58,7 +58,11 @@ export class FileUploadComponent {
         alias: 'showLabel',
     });
 
-    remoteFiles = input<string[]>(['1', '2', '3'], {
+    multiple = input<boolean>(false, {
+        alias: 'multiple',
+    });
+
+    remoteFiles = input<string[]>([], {
         alias: 'remoteFiles',
     });
 

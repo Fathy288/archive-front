@@ -8,7 +8,7 @@
             <span class="text-danger">*</span>
         }
     </label>
-    <ngx-dropzone (change)="onSelect($event)">
+    <ngx-dropzone (change)="onSelect($event)" [multiple]="multiple()">
         <ngx-dropzone-label class="text-center">
             <icon-file-upload class="w-14"></icon-file-upload>
             <p class="mb-0">اضغط أو اسحب هنا لرفع الملفات</p>

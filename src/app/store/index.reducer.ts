@@ -13,6 +13,7 @@ export const initialState = {
     isShowMainLoader: false,
     isShowRouterLoader: false,
     semidark: false,
+    user: null,
 };
 
 export function indexReducer(state = initialState, action: any) {
@@ -91,6 +92,9 @@ export function indexReducer(state = initialState, action: any) {
         return { ...state, ...{ locale: payload } };
     } else if (type === 'toggleSidebar') {
         return { ...state, ...{ sidebar: !state.sidebar } };
+    }
+    if (type === 'setLoginUser') {
+        return { ...state, ...{ user: payload } };
     }
 
     return state;

@@ -3,7 +3,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 //Routes
@@ -39,6 +39,8 @@ import { Error404Component } from './misc/error404';
 import { Error500Component } from './misc/error500';
 import { Error403Component } from './misc/error403';
 import { FlatpickrDefaults } from 'angularx-flatpickr';
+import { AuthInterceptor } from './core/interceptor/auth.interceptor';
+import { ErrorInterceptor } from './core/interceptor/error.interceptor';
 
 @NgModule({
     imports: [
@@ -69,7 +71,7 @@ import { FlatpickrDefaults } from 'angularx-flatpickr';
         Error500Component,
         Error403Component,
     ],
-    providers: [Title, FlatpickrDefaults],
+    providers: [Title, FlatpickrDefaults, provideHttpClient(withFetch(), withInterceptors([AuthInterceptor, ErrorInterceptor]))],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
