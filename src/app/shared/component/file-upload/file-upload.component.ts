@@ -1,20 +1,19 @@
-import { Component, DestroyRef, input, output, TemplateRef } from '@angular/core';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { IconModule } from '../../icon/icon.module';
+import { Component, DestroyRef, input, output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { TextMaskModule } from '@matheo/text-mask';
-import { IconModule } from '../../icon/icon.module';
-import { UtilityService } from 'src/app/service/utility.service';
 import { NgxTippyModule } from 'ngx-tippy-wrapper';
 
 @Component({
-    selector: 'normal-hijri-input',
+    selector: 'dropzone-file-upload',
     standalone: true,
-    imports: [ReactiveFormsModule, CommonModule, TextMaskModule, IconModule, NgxTippyModule],
-    templateUrl: './hijri-input.component.html',
-    styleUrl: './hijri-input.component.css',
+    imports: [NgxDropzoneModule, IconModule, ReactiveFormsModule, CommonModule, NgxTippyModule],
+    templateUrl: './file-upload.component.html',
+    styleUrl: './file-upload.component.css',
 })
-export class HijriInputComponent {
+export class FileUploadComponent {
     label = input<string | null>(null, {
         alias: 'label',
     });
@@ -35,28 +34,8 @@ export class HijriInputComponent {
         alias: 'errorStyleClass',
     });
 
-    name = input<string | null>(null, {
-        alias: 'name',
-    });
-
-    min = input<number | null>(null, {
-        alias: 'min',
-    });
-
-    max = input<number | null>(null, {
-        alias: 'max',
-    });
-
-    unit = input<string | null>(null, {
-        alias: 'unit',
-    });
-
     inputId = input<string | null>(null, {
         alias: 'inputId',
-    });
-
-    inputType = input<'normal' | 'icon' | 'group' | null>('normal', {
-        alias: 'inputType',
     });
 
     control = input<FormControl>(new FormControl(), {
@@ -75,29 +54,17 @@ export class HijriInputComponent {
         alias: 'isRequired',
     });
 
-    readOnly = input<boolean>(false, {
-        alias: 'readOnly',
-    });
-
-    disabled = input<boolean>(false, {
-        alias: 'disabled',
-    });
-
     showLabel = input<boolean>(true, {
         alias: 'showLabel',
     });
 
-    autoComplete = input<string | null>('off', {
-        alias: 'autoComplete',
+    remoteFiles = input<string[]>(['1', '2', '3'], {
+        alias: 'remoteFiles',
     });
 
-    mask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
     valueChanged = output<any>();
 
-    constructor(
-        private destroyRef: DestroyRef,
-        private utility: UtilityService,
-    ) {}
+    constructor(private destroyRef: DestroyRef) {}
 
     ngOnInit(): void {
         this.control()
@@ -108,7 +75,6 @@ export class HijriInputComponent {
                         value: this.control()?.value,
                         valid: this.control()?.valid,
                     });
-                    console.log(this.utility.getHijriDateString(this.control().value));
                 },
             });
     }
@@ -117,8 +83,15 @@ export class HijriInputComponent {
         return this.control()?.errors;
     }
 
-    get dateString(): string | null {
-        if (!this.control()?.value || this.control()?.value?.length !== 10) return null;
-        return this.utility.getHijriDateString(this.control().value);
+    files: File[] = [];
+
+    onSelect(event: any) {
+        this.files.push(...event.addedFiles);
+        this.control()?.patchValue([...this.files]);
+    }
+
+    onRemove(event: any) {
+        this.files.splice(this.files.indexOf(event), 1);
+        this.control()?.patchValue([...this.files]);
     }
 }

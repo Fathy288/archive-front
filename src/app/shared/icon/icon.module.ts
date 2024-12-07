@@ -166,6 +166,7 @@ import { IconCodeFilesComponent } from 'src/app/shared/icon/icon-code-file';
 import { IconExcelComponent } from './icon-excel';
 import { IconCSVComponent } from './icon-csv';
 import { IconResetFilterComponent } from './icon-reset-filter';
+import { IconFileUpload } from './icon-file-upload';
 
 @NgModule({
     imports: [CommonModule],
@@ -336,6 +337,7 @@ import { IconResetFilterComponent } from './icon-reset-filter';
         IconZipFileComponent,
         IconCodeFilesComponent,
         IconResetFilterComponent,
+        IconFileUpload,
     ],
     exports: [
         IconResetFilterComponent,
@@ -504,6 +506,7 @@ import { IconResetFilterComponent } from './icon-reset-filter';
         IconXCircleComponent,
         IconZipFileComponent,
         IconCodeFilesComponent,
+        IconFileUpload,
     ],
 })
 export class IconModule {}

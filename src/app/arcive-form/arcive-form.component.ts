@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { EditorComponent } from '../shared/component/editor/editor.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FileUploadComponent } from '../shared/component/file-upload/file-upload.component';
 
 @Component({
     selector: 'app-arcive-form',
     standalone: true,
-    imports: [EditorComponent],
+    imports: [EditorComponent, FileUploadComponent],
     templateUrl: './arcive-form.component.html',
     styleUrl: './arcive-form.component.css',
 })

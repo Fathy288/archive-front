@@ -1,0 +1,17 @@
+ngx-dropzone {
+    border-color: #cfcfcf !important;
+}
+
+ngx-dropzone-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+ngx-dropzone-preview ngx-dropzone-label {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+}
