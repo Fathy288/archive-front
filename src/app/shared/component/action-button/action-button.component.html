@@ -1,0 +1,15 @@
+<button
+    type="{{ type() }}"
+    class="btn {{ styleClass() ? styleClass() : '' }} shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]"
+    [disabled]="disabled() || loading()"
+    (click)="handle($event)"
+>
+    @if (loading()) {
+        <span
+            class="animate-spin border-[3px] border-l-transparent rounded-full inline-block align-middle me-3 {{
+                spinnerStyleClass() ? spinnerStyleClass() : undefined
+            }}"
+        ></span>
+    }
+    {{ text() }}
+</button>

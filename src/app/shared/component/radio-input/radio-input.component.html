@@ -1,1 +1,9 @@
-<p>radio-input works!</p>
+<div [ngClass]="{ 'has-error': getFormControlErrors() && control().touched }">
+    <label class="inline-flex">
+        <input type="radio" class="form-radio {{ inputStyleClass() }}" [formControl]="control()" [name]="name()" [value]="value()" />
+        <span class="{{ labelStyleClass() }}" [ngClass]="{ 'text-danger': getFormControlErrors() && control().touched }">{{ label() }}</span>
+    </label>
+    <ng-container *ngIf="getFormControlErrors() && control().touched && errorMessage()">
+        <p class="mt-1 text-danger {{ errorStyleClass() ? errorStyleClass() : '' }}">{{ errorMessage() }}</p>
+    </ng-container>
+</div>

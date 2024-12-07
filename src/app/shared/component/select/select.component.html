@@ -1,1 +1,87 @@
-<p>select works!</p>
+<div [ngClass]="getFormControlErrors() && control().touched ? 'has-error' : ''">
+    <label class="mb-3 {{ labelStyleClass() ? labelStyleClass() : '' }}" [attr.for]="inputId()"
+        >{{ label() }}
+        @if (additionalLabel()) {
+            <span class="text-gray-600">( {{ additionalLabel() }} )</span>
+        }
+        @if (isRequired()) {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    @if (inputType() === 'normal') {
+        <select
+            class="form-select form-select-lg ltr:rounded-l-none rtl:rounded-r-none {{ inputStyleClass() ? inputStyleClass() : undefined }}"
+            [attr.id]="inputId()"
+            [ngClass]="{ 'text-gray-500': !control().value }"
+        >
+            @if (placeholder()) {
+                <option value="">{{ placeholder() }}</option>
+            }
+            @for (option of options(); track option; let i = $index) {
+                <option [value]="option[optionValue()]">{{ option[optionLabel()] }}</option>
+            }
+        </select>
+    } @else if (inputType() === 'icon') {
+        <div class="relative text-white-dark">
+            <select
+                class="form-select form-select-lg ps-10 ltr:rounded-l-none rtl:rounded-r-none {{ inputStyleClass() ? inputStyleClass() : undefined }}"
+                [attr.id]="inputId()"
+                [ngClass]="{ 'text-gray-500': !control().value }"
+            >
+                @if (placeholder()) {
+                    <option value="">{{ placeholder() }}</option>
+                }
+                @for (option of options(); track option; let i = $index) {
+                    <option [value]="option[optionValue()]">{{ option[optionLabel()] }}</option>
+                }
+            </select>
+            <span class="absolute start-4 top-1/2 -translate-y-1/2">
+                <ng-container *ngTemplateOutlet="iconTemplate()"></ng-container>
+            </span>
+        </div>
+    } @else if (inputType() === 'group') {
+        <div class="flex text-white-dark">
+            <div
+                class="bg-[#eee] flex justify-center items-center rtl:rounded-r-md ltr:rounded-l-md px-3 font-semibold border ltr:border-l-0 rtl:border-r-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]"
+            >
+                <ng-container *ngTemplateOutlet="iconTemplate()"></ng-container>
+            </div>
+            <select
+                class="form-select form-select-lg ltr:rounded-l-none rtl:rounded-r-none {{ inputStyleClass() ? inputStyleClass() : undefined }}"
+                [attr.id]="inputId()"
+                [ngClass]="{ 'text-gray-500': !control().value }"
+            >
+                @if (placeholder()) {
+                    <option value="">{{ placeholder() }}</option>
+                }
+                @for (option of options(); track option; let i = $index) {
+                    <option [value]="option[optionValue()]">{{ option[optionLabel()] }}</option>
+                }
+            </select>
+        </div>
+    }
+
+    <ng-container *ngIf="getFormControlErrors()">
+        <div
+            *ngIf="getFormControlErrors() && control()?.touched && showFeedback"
+            class="mt-2 text-danger {{ errorStyleClass() ? errorStyleClass() : undefined }}"
+        >
+            <span *ngIf="getFormControlErrors().required"> خانة {{ label() }} مطلوبة. </span>
+            <span *ngIf="getFormControlErrors().invalidEmail"> ادخل بريد إلكتروني صالح </span>
+            <span *ngIf="getFormControlErrors().emailExists"> البريد الإلكتروني مستخدم من قبل </span>
+            <span *ngIf="getFormControlErrors().invalidURL"> ادخل رابط ويب صحيح </span>
+            <span *ngIf="getFormControlErrors().invalidPhone"> رقم الهاتف المدخل غير صالح </span>
+            <span *ngIf="getFormControlErrors().minlength">
+                عدد الحروف الإدنى
+                {{ getFormControlErrors().minlength.requiredLength }} حرف.
+            </span>
+            <span *ngIf="getFormControlErrors().maxlength">
+                عدد الحروف الأقصى
+                {{ getFormControlErrors().maxlength.requiredLength }} حرف.
+            </span>
+            <span *ngIf="getFormControlErrors().min"> أدنى قيمة هي {{ getFormControlErrors().min.min }} {{ unit() }}. </span>
+            <span *ngIf="getFormControlErrors().max"> أقصى قيمة هي {{ getFormControlErrors().max.max }} {{ unit() }}. </span>
+            <span *ngIf="getFormControlErrors().existsBefore"> {{ label() }} مستخدم قبل ذلك </span>
+        </div>
+    </ng-container>
+</div>

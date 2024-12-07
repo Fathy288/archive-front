@@ -22,6 +22,8 @@ import { NgxCustomModalComponent } from 'ngx-custom-modal';
 import { NgSelectModule } from '@ng-select/ng-select';
 // flatpicker
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { TextMaskModule } from '@matheo/text-mask';
+import { QuillModule } from 'ngx-quill';
 
 // icons
 
@@ -41,6 +43,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
         NgxCustomModalComponent,
         NgSelectModule,
         FlatpickrModule,
+        TextMaskModule,
+        QuillModule.forRoot(),
     ],
     exports: [
         FormsModule,
@@ -54,6 +58,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
         NgxCustomModalComponent,
         NgSelectModule,
         FlatpickrModule,
+        QuillModule,
     ],
 })
 export class SharedModule {

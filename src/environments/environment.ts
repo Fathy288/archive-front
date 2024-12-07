@@ -4,4 +4,6 @@
 
 export const environment = {
     production: false,
+    baseURL: 'https://archive.runasp.net/',
+    apiURL: 'https://archive.runasp.net/api/',
 };

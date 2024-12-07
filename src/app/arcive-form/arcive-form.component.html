@@ -8,6 +8,15 @@
         </li>
     </ul>
     <div class="grid grid-cols-12 gap-4 mt-5">
-        <div class="col-span-12 panel"></div>
+        <div class="col-span-12 panel">
+            <normal-quill-editor
+                label="ادخل محتوى الفهرس"
+                inputStyleClass="w-full"
+                labelStyleClass="text-sm"
+                errorStyleClass="text-sm"
+                placeholder="تفاصيل الملف ....."
+                [control]="getFC('content')"
+            ></normal-quill-editor>
+        </div>
     </div>
 </div>

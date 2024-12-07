@@ -1,1 +1,60 @@
-<p>ng-select works!</p>
+<div [ngClass]="getFormControlErrors() && control().touched ? 'has-error' : ''">
+    <label class="mb-3 {{ labelStyleClass() ? labelStyleClass() : '' }}" [attr.for]="inputId()"
+        >{{ label() }}
+        @if (additionalLabel()) {
+            <span class="text-gray-600">( {{ additionalLabel() }} )</span>
+        }
+        @if (isRequired()) {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    @if (inputType() === 'normal') {
+        <ng-select
+            class="w-full ltr:rounded-l-none rtl:rounded-r-none {{ inputStyleClass() ? inputStyleClass() : undefined }}"
+            [attr.id]="inputId()"
+            [ngClass]="{ 'text-gray-500': !control().value }"
+            [bindLabel]="optionLabel()"
+            [bindValue]="optionValue()"
+            [formControl]="control()"
+            [clearable]="clearable()"
+            [searchable]="searcheable()"
+            [placeholder]="placeholder()"
+            [disabled]="disabled()"
+            [readonly]="readOnly()"
+            [multiple]="multiple()"
+        >
+        </ng-select>
+    } @else if (inputType() === 'group') {
+        <div class="flex text-white-dark">
+            <div
+                class="bg-[#eee] flex justify-center items-center rtl:rounded-r-md ltr:rounded-l-md px-3 font-semibold border ltr:border-l-0 rtl:border-r-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]"
+            >
+                <ng-container *ngTemplateOutlet="iconTemplate()"></ng-container>
+            </div>
+            <ng-select
+                class="w-full ltr:rounded-l-none rtl:rounded-r-none {{ inputStyleClass() ? inputStyleClass() : undefined }}"
+                [attr.id]="inputId()"
+                [ngClass]="{ 'text-gray-500': !control().value }"
+                [bindLabel]="optionLabel()"
+                [bindValue]="optionValue()"
+                [formControl]="control()"
+                [clearable]="clearable()"
+                [searchable]="searcheable()"
+                [placeholder]="placeholder()"
+                [disabled]="disabled()"
+                [readonly]="readOnly()"
+                [multiple]="multiple()"
+            >
+            </ng-select>
+        </div>
+    }
+
+    <ng-container *ngIf="getFormControlErrors()">
+        <div
+            *ngIf="getFormControlErrors() && control()?.touched && showFeedback"
+            class="mt-2 text-danger {{ errorStyleClass() ? errorStyleClass() : undefined }}"
+        >
+            <span *ngIf="getFormControlErrors().required"> خانة {{ label() }} مطلوبة. </span>
+        </div>
+    </ng-container>
+</div>

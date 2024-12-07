@@ -10,4 +10,6 @@
 @import 'nouislider/dist/nouislider.min.css';
 @import 'datatable.css';
 @import 'modal.css';
+@import 'quill-editor.css';
+@import 'select2.css';
 @import 'tailwind.css';

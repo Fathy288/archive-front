@@ -17,42 +17,82 @@
                         <p class="mt-2 text-sm font-bold leading-normal text-white-dark">ادخل بيانات التعريف الخاصة بك لإتمام تسجيل الدخول</p>
                     </div>
                     <form class="space-y-5 dark:text-white" (submit)="router.navigate(['/'])">
-                        <div>
-                            <label for="Email">اسم المستخدم</label>
-                            <div class="relative text-white-dark">
-                                <input id="Email" type="email" placeholder="أدخل اسم المستخدم ..." class="form-input ps-10 placeholder:text-white-dark" />
-                                <span class="absolute start-4 top-1/2 -translate-y-1/2">
-                                    <icon-user [fill]="true" />
-                                </span>
-                            </div>
+                        <div class="mb-4">
+                            <normal-input
+                                inputId="username"
+                                [control]="getFC('username')"
+                                label="اسم المستخدم"
+                                [isRequired]="true"
+                                placeholder="ادخل اسم المستخدم .."
+                                autoComplete="off"
+                                type="text"
+                                labelStyleClass="text-sm"
+                                inputStyleClass="text-sm"
+                                errorStyleClass="text-sm"
+                                inputType="icon"
+                                [iconTemplate]="usernameTemplate"
+                            ></normal-input>
+                            <ng-template #usernameTemplate>
+                                <icon-user [fill]="true" />
+                            </ng-template>
                         </div>
-                        <div>
-                            <label for="Password">كلمة السر</label>
-                            <div class="relative text-white-dark">
-                                <input
-                                    id="Password"
-                                    type="password"
-                                    placeholder="ادخل كلمة السر الخاصة بك"
-                                    class="form-input ps-10 placeholder:text-white-dark"
-                                />
-                                <span class="absolute start-4 top-1/2 -translate-y-1/2">
-                                    <icon-lock-dots [fill]="true" />
-                                </span>
-                            </div>
+                        <div class="mb-4">
+                            <normal-input
+                                inputId="password"
+                                [control]="getFC('password')"
+                                label="كلمة السر"
+                                [isRequired]="true"
+                                placeholder="ادخل كلمة السر .."
+                                autoComplete="off"
+                                type="password"
+                                labelStyleClass="text-sm"
+                                inputStyleClass="text-sm"
+                                errorStyleClass="text-sm"
+                                inputType="icon"
+                                [iconTemplate]="passwordTemplate"
+                            ></normal-input>
+                            <ng-template #passwordTemplate>
+                                <icon-lock-dots [fill]="true" />
+                            </ng-template>
                         </div>
-                        <div>
-                            <label class="flex cursor-pointer items-center">
-                                <input type="checkbox" class="form-checkbox bg-white dark:bg-black" />
-                                <span class="text-white-dark">تذكرني عند الدخول مرة أخرى</span>
-                            </label>
+                        <div class="mb-4">
+                            <normal-ng-select
+                                [control]="getFC('date')"
+                                [options]="options"
+                                optionLabel="label"
+                                optionValue="id"
+                                placeholder="اختر التاريخ"
+                                label="اختر النوع"
+                                [readOnly]="false"
+                                [disabled]="false"
+                                [searcheable]="true"
+                                [clearable]="true"
+                                [multiple]="true"
+                                [iconTemplate]="dateTemplate"
+                                inputType="group"
+                            ></normal-ng-select>
+                            <ng-template #dateTemplate>
+                                <icon-lock-dots [fill]="true" />
+                            </ng-template>
                         </div>
-                        <button
+                        <div class="mb-4">
+                            <normal-check-input
+                                [control]="getFC('checked')"
+                                label="تذكرني عند الدخول مرة أخرى"
+                                labelStyleClass="text-sm text-white-dark"
+                                inputStyleClass="text-sm rounded-full text-primary"
+                                errorStyleClass="text-sm"
+                                errorMessage="يجب اختيار هذا الخيار"
+                            ></normal-check-input>
+                        </div>
+                        <action-button
+                            (onClicked)="login()"
                             type="button"
-                            routerLink="/dashboard"
-                            class="btn btn-primary !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]"
-                        >
-                            تسجيل دخول
-                        </button>
+                            styleClass="btn-primary mt-6 w-full border-0 py-3"
+                            [loading]="false"
+                            text="تسجيل الدخول"
+                            spinnerStyleClass="border-white w-6 h-6"
+                        ></action-button>
                     </form>
                 </div>
             </div>

@@ -1,1 +1,54 @@
-<p>hijri-input works!</p>
+<div [ngClass]="getFormControlErrors() && control().touched ? 'has-error' : ''">
+    <label class="mb-3 {{ labelStyleClass() ? labelStyleClass() : '' }}" [attr.for]="inputId()"
+        >{{ label() }}
+        @if (additionalLabel()) {
+            <span class="text-gray-600">( {{ additionalLabel() }} )</span>
+        }
+        @if (isRequired()) {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    @if (inputType() === 'icon') {
+        <div class="relative text-white-dark">
+            <input
+                [attr.id]="inputId()"
+                type="text"
+                placeholder="YYYY-MM-DD"
+                class="form-input form-input-lg ps-12 {{ inputStyleClass() ? inputStyleClass() : undefined }}"
+                [formControl]="control()"
+                [textMask]="{ mask: mask }"
+                [readOnly]="readOnly()"
+            />
+            <span class="absolute start-4 top-1/2 -translate-y-1/2 cursor-pointer" ngxTippy="{{ dateString ? dateString : 'غير محدد' }}">
+                <icon-calendar fill="true"></icon-calendar>
+            </span>
+        </div>
+    } @else if (inputType() === 'group') {
+        <div class="flex text-white-dark">
+            <div
+                class="bg-[#eee] flex justify-center items-center rtl:rounded-r-md ltr:rounded-l-md px-3 font-semibold border ltr:border-l-0 rtl:border-r-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]"
+            >
+                <icon-calendar fill="true"></icon-calendar>
+            </div>
+            <input
+                [attr.id]="inputId()"
+                type="text"
+                placeholder="DD-MM-YYYY"
+                class="form-input form-input-lg  ltr:rounded-l-none rtl:rounded-r-none {{ inputStyleClass() ? inputStyleClass() : undefined }}"
+                [formControl]="control()"
+                [textMask]="{ mask: mask }"
+                [readOnly]="readOnly()"
+            />
+        </div>
+    }
+
+    <ng-container *ngIf="getFormControlErrors()">
+        <div
+            *ngIf="getFormControlErrors() && control()?.touched && showFeedback"
+            class="mt-2 text-danger {{ errorStyleClass() ? errorStyleClass() : undefined }}"
+        >
+            <span *ngIf="getFormControlErrors().required"> خانة {{ label() }} مطلوبة. </span>
+            <span *ngIf="getFormControlErrors().existsBefore"> {{ label() }} مستخدم قبل ذلك </span>
+        </div>
+    </ng-container>
+</div>

@@ -1,1 +1,35 @@
-<p>textarea works!</p>
+<div [ngClass]="getFormControlErrors() && control().touched ? 'has-error' : ''">
+    <label class="mb-3 {{ labelStyleClass() ? labelStyleClass() : '' }}" [attr.for]="inputId()"
+        >{{ label() }}
+        @if (additionalLabel()) {
+            <span class="text-gray-600">( {{ additionalLabel() }} )</span>
+        }
+        @if (isRequired()) {
+            <span class="text-danger">*</span>
+        }
+    </label>
+    <textarea
+        [rows]="rows()"
+        [attr.id]="inputId()"
+        [attr.placeholder]="placeholder() ? placeholder() : undefined"
+        class="form-input form-input-lg {{ inputStyleClass() ? inputStyleClass() : undefined }}"
+        [formControl]="control()"
+    ></textarea>
+
+    <ng-container *ngIf="getFormControlErrors()">
+        <div
+            *ngIf="getFormControlErrors() && control()?.touched && showFeedback"
+            class="mt-2 text-danger {{ errorStyleClass() ? errorStyleClass() : undefined }}"
+        >
+            <span *ngIf="getFormControlErrors().required"> خانة {{ label() }} مطلوبة. </span>
+            <span *ngIf="getFormControlErrors().minlength">
+                عدد الحروف الإدنى
+                {{ getFormControlErrors().minlength.requiredLength }} حرف.
+            </span>
+            <span *ngIf="getFormControlErrors().maxlength">
+                عدد الحروف الأقصى
+                {{ getFormControlErrors().maxlength.requiredLength }} حرف.
+            </span>
+        </div>
+    </ng-container>
+</div>

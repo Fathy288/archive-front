@@ -1,1 +1,9 @@
-<p>check-input works!</p>
+<div [ngClass]="{ 'has-error': getFormControlErrors() && control().touched }">
+    <label class="inline-flex">
+        <input type="checkbox" class="form-checkbox {{ inputStyleClass() }}" [formControl]="control()" />
+        <span class="{{ labelStyleClass() }}" [ngClass]="{ 'text-danger': getFormControlErrors() && control().touched }">{{ label() }}</span>
+    </label>
+    <ng-container *ngIf="getFormControlErrors() && control().touched && errorMessage()">
+        <p class="mt-1 text-danger {{ errorStyleClass() ? errorStyleClass() : '' }}">{{ errorMessage() }}</p>
+    </ng-container>
+</div>

@@ -57,9 +57,31 @@
 }
 
 .custom-multiselect.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
-    @apply  !bg-[#128c4f];
+    @apply !bg-[#128c4f];
 }
 
 .custom-multiselect.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-placeholder {
     @apply ltr:!pl-1 rtl:!pr-1;
+}
+
+[dir='rtl'] .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-input {
+    padding: 5px 3px 6px 0 !important;
+    font-size: 1rem !important;
+}
+
+.ng-select {
+    cursor: pointer !important;
+}
+
+ng-select .ng-select-container {
+    border-color: rgb(224, 230, 237) !important;
+}
+
+ng-select.ng-invalid.ng-touched .ng-select-container {
+    border-color: red !important;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-placeholder {
+    top: 7px !important;
+    padding-bottom: 0 !important;
 }
